@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import {
-  Container,
-  Button,
-  FormControl,
-  Form,
-  Row,
-  Col,
-} from "react-bootstrap";
-import { useRef } from "react";
+import React, { useState ,useRef} from "react";
+import {Container,Button,FormControl,Form,Row,Col,} from "react-bootstrap";
+import {useNavigate} from 'react-router-dom'
 import "./Login.css";
+
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,6 +10,8 @@ const Login = () => {
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const confirmPasswordInputRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const switchAuthHandler = () => {
     setIsLogin((prevIsLogin) => !prevIsLogin);
@@ -76,6 +72,7 @@ const Login = () => {
 
         emailInputRef.current.value = "";
         passwordInputRef.current.value = "";
+        navigate('./MainPage')
       })
       .catch((err) => {
         alert(err.message);
