@@ -5,17 +5,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 6px;
 }
 
 .mailbox-content {
   padding: 20px;
+  font-size: larger;
+  font: bold;
 }
 .text-editor {
-    width: 70%;
-    margin: 0 auto;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-    margin-top: 20px;
-  }
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  margin-top: 20px;
+}
+.inbox-btn {
+  justify-content: flex-end;
+  margin-right: 15px;
+}

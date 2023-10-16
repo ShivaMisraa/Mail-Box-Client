@@ -73,6 +73,8 @@ const Login = () => {
         emailInputRef.current.value = "";
         passwordInputRef.current.value = "";
         navigate('./MainPage')
+
+        localStorage.setItem('userEmail', enteredEmail)
       })
       .catch((err) => {
         alert(err.message);

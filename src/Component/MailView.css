@@ -1,0 +1,43 @@
+.email-list-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  margin-top: 15px;
+}
+
+.email-list {
+  list-style-type: none; 
+  padding: 0;
+}
+
+.email-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff; 
+  transition: background-color 0.3s;
+}
+
+.email-item:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.no-emails-message {
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+}
+
+.h2-tag {
+  text-align: center;
+  color: #333; 
+}
+
+.compose-btn{
+  margin-right: 15px;
+}

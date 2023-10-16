@@ -13,6 +13,9 @@ const MyTextEditor = () => {
   const subjectRef = useRef(null);
   const quillRef = useRef(null);
 
+  const userEmail = localStorage.getItem("userEmail");
+  // console.log(userEmail)
+
   const handleRecipientChange = (e) => {
     setRecipient(e.target.value);
   };
@@ -26,12 +29,12 @@ const MyTextEditor = () => {
   };
 
   const sanitizeHtml = (html) => {
-    // Remove <p> tags and other unwanted tags using a regular expression
+   
     return html.replace(/<\/?p>/g, "");
   };
 
   const handleSendClick = () => {
-    // Sanitize the text before sending
+   
     const sanitizedText = sanitizeHtml(text);
     
     fetch("https://mail-box-client-171d8-default-rtdb.firebaseio.com/email.json", {
@@ -40,6 +43,7 @@ const MyTextEditor = () => {
         recipient,
         subject,
         text: sanitizedText,
+        sender: userEmail 
       }),
       headers: {
         "Content-type": "application/json"
