@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Inbox.css";
-import { Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEmails, selectAllEmails } from "../Store/emailSlice";
@@ -54,10 +54,33 @@ const EmailList = () => {
         console.error("Error fetching email data:", error);
       });
   };
+
+  const deleteEmail = (emailId) => {
+    fetch(
+      `https://mail-box-client-171d8-default-rtdb.firebaseio.com/email/${emailId}.json`,
+      {
+        method: "DELETE",
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          console.log("Email deleted from Firebase");
+          dispatch({ type: 'email/deleteEmail', payload: emailId });
+        } else {
+          console.error("Error deleting email from Firebase");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting email:", error);
+      });
+  };
+
   const countUnreadMessages = () => {
     const count = emails.filter((email) => email.blueTick).length;
     setUnreadCount(count);
   };
+
+
   useEffect(() => {
     countUnreadMessages();
   }, [emails]);
@@ -78,16 +101,21 @@ const EmailList = () => {
         <ul className="email-list">
           {emails.length > 0 ? (
             emails.map((email) => (
-              <Link to={`/emails/${email.id}`} key={email.id}>
-                <li
-                  className={`email-item`}
-                  onClick={() => markEmailAsUnread(email.id)}
-                >
-                  {email.blueTick ? <BlueTick /> : null}
-                  <strong>Sender:</strong> {email.sender}
-                  <strong> Subject:</strong> {email.subject}
-                </li>
-              </Link>
+              <div key={email.id} className="email-item">
+                <Button variant="outline-danger" >
+                <Image onClick={() => deleteEmail(email.id)} src="https://cdn4.iconfinder.com/data/icons/round-buttons/512/blue_x.png" alt="Delete"  style={{ width: "25px", height: "25px" }} />
+                </Button>
+                <Link to={`/emails/${email.id}`}>
+                  <li
+                    className={`email-item `}
+                    onClick={() => markEmailAsUnread(email.id)}
+                  >
+                    {email.blueTick ? <BlueTick /> : null}
+                    <strong>Sender:</strong> {email.sender}
+                    <strong> Subject:</strong> {email.subject}
+                  </li>
+                </Link>
+              </div>
             ))
           ) : (
             <p className="no-emails-message">No emails to display.</p>

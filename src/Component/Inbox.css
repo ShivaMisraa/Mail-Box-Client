@@ -1,5 +1,5 @@
 .email-list-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -10,7 +10,7 @@
 }
 
 .email-list {
-  list-style-type: none; 
+  list-style-type: none;
   padding: 0;
 }
 
@@ -19,8 +19,9 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #fff; 
+  background-color: #fff;
   transition: background-color 0.3s;
+  
 }
 
 .email-item:hover {
@@ -36,25 +37,29 @@
 
 .h2-tag {
   text-align: center;
-  color: #333; 
+  color: #333;
 }
 
-.compose-btn{
+.compose-btn {
   margin-right: 15px;
 }
 
 .unread-count {
-  background-color: #007bff; 
-  color: #fff; 
-  padding: 5px 10px; 
-  border-radius: 5px; 
-  font-weight: bold; 
-  margin-top: 10px; 
-  display: inline-block; 
-  justify-content:end;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-block;
+  justify-content: end;
   margin-bottom: 10px;
-
 }
 
+.email-content {
+  flex-grow: 1;
+}
 
-
+.dlt-btn {
+  justify-self: end;
+}
