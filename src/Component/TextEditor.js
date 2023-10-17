@@ -43,7 +43,8 @@ const MyTextEditor = () => {
         recipient,
         subject,
         text: sanitizedText,
-        sender: userEmail 
+        sender: userEmail ,
+        blueTick: true,
       }),
       headers: {
         "Content-type": "application/json"

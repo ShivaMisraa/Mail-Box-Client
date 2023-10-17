@@ -1,0 +1,8 @@
+.blue-mark {
+    background-color: #3e1bd8; 
+    display: inline-block;
+    width: 10px; 
+    height: 10px;
+    border-radius: 2px; 
+    margin-right: 10px; 
+  }

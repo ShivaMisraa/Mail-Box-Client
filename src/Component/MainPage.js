@@ -8,7 +8,7 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const inboxHandler = () => {
-    navigate("/Mailview");
+    navigate("/EmailList");
   };
 
   const logOutHandler = () => {
