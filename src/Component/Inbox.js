@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Inbox.css";
-import { Button, Container, Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchEmails, selectAllEmails } from "../Store/emailSlice";
+import { fetchEmailsPeriodically, selectAllEmails } from "../Store/emailSlice";
 import { Link } from "react-router-dom";
 import BlueTick from "./blueTick";
 
@@ -18,7 +18,7 @@ const EmailList = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchEmails());
+    dispatch(fetchEmailsPeriodically());
   }, [dispatch]);
 
   const emails = useSelector(selectAllEmails);
