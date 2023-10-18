@@ -4,6 +4,7 @@ import Login from './Authentication/Login';
 import MainPage from './Component/MainPage';
 import EmailList from './Component/Inbox';
 import ViewMail from "./Component/ViewMail";
+import SentEmail from "./Component/SentEmail";
  
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
         <Route path="/MainPage" element={<MainPage />} />
         <Route path="/EmailList" element={<EmailList />} />
         <Route path="/emails/:emailId" element={<ViewMail/>} />
-        
+        <Route path="/SentMail" element={<SentEmail/>} />
+
       </Routes>
     </BrowserRouter>
   );

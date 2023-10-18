@@ -3,9 +3,12 @@ import "./MainPage.css";
 import MyTextEditor from "./TextEditor";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { fetchEmails } from '../Store/emailSlice';
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const inboxHandler = () => {
     navigate("/EmailList");
@@ -15,6 +18,10 @@ const MainPage = () => {
     localStorage.removeItem("userEmail");
     navigate("/");
   };
+  const sentHanlder= () =>{
+    navigate("/SentMail");
+    dispatch(fetchEmails());
+  }
 
   return (
     <div>
@@ -29,6 +36,10 @@ const MainPage = () => {
         <Button className="inbox-btn" onClick={inboxHandler}>
           Inbox
         </Button>
+        <Button className="inbox-btn" onClick={sentHanlder}>
+          Sent
+        </Button>
+        
       </div>
       <div className="text-editor">
         <MyTextEditor />

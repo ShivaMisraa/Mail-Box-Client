@@ -7,20 +7,16 @@ const initialState = {
 };
 
 export const fetchEmails = createAsyncThunk("emails/fetchEmails", async () => {
-  const userEmail = localStorage.getItem("userEmail");
-
   const response = await fetch(
     "https://mail-box-client-171d8-default-rtdb.firebaseio.com/email.json"
   );
   const data = await response.json();
 
   if (data) {
-    const emailArray = Object.keys(data)
-      .map((key) => ({
-        id: key,
-        ...data[key],
-      }))
-      .filter((email) => email.recipient === userEmail);
+    const emailArray = Object.keys(data).map((key) => ({
+      id: key,
+      ...data[key],
+    }));
 
     return emailArray;
   } else {

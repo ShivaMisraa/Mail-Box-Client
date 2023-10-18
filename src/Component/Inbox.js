@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./Inbox.css";
-import { Button, Image } from "react-bootstrap";
+import { Button, Container, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEmails, selectAllEmails } from "../Store/emailSlice";
 import { Link } from "react-router-dom";
 import BlueTick from "./blueTick";
 
-
 const EmailList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const composeHandler = () => {
+  const userEmail = localStorage.getItem("userEmail");
+
+  const backHandler = () => {
     navigate("/MainPage");
   };
 
@@ -23,6 +24,10 @@ const EmailList = () => {
   const emails = useSelector(selectAllEmails);
 
   const [unreadCount, setUnreadCount] = useState(0);
+
+  const filteredEmails = emails.filter(
+    (email) => email.recipient === userEmail
+  );
 
   const markEmailAsUnread = (emailId) => {
     fetch(
@@ -65,7 +70,7 @@ const EmailList = () => {
       .then((response) => {
         if (response.ok) {
           console.log("Email deleted from Firebase");
-          dispatch({ type: 'email/deleteEmail', payload: emailId });
+          dispatch({ type: "email/deleteEmail", payload: emailId });
         } else {
           console.error("Error deleting email from Firebase");
         }
@@ -76,14 +81,13 @@ const EmailList = () => {
   };
 
   const countUnreadMessages = () => {
-    const count = emails.filter((email) => email.blueTick).length;
+    const count = filteredEmails.filter((email) => email.blueTick).length;
     setUnreadCount(count);
   };
 
-
   useEffect(() => {
     countUnreadMessages();
-  }, [emails]);
+  }, [filteredEmails]);
 
   return (
     <>
@@ -91,19 +95,24 @@ const EmailList = () => {
         <div className="mailbox-content">
           <span>Welcome to your mailbox</span>
         </div>
-        <Button className="compose-btn" onClick={composeHandler}>
-          Compose
+        <Button className="compose-btn" onClick={backHandler}>
+          Back
         </Button>
       </div>
       <div className="email-list-container">
         <h2 className="h2-tag">Emails</h2>
         <div className="unread-count">Unread: {unreadCount}</div>
         <ul className="email-list">
-          {emails.length > 0 ? (
-            emails.map((email) => (
+          {filteredEmails.length > 0 ? (
+            filteredEmails.map((email) => (
               <div key={email.id} className="email-item">
-                <Button variant="outline-danger" >
-                <Image onClick={() => deleteEmail(email.id)} src="https://cdn4.iconfinder.com/data/icons/round-buttons/512/blue_x.png" alt="Delete"  style={{ width: "25px", height: "25px" }} />
+                <Button variant="outline-danger">
+                  <Image
+                    onClick={() => deleteEmail(email.id)}
+                    src="https://cdn4.iconfinder.com/data/icons/round-buttons/512/blue_x.png"
+                    alt="Delete"
+                    style={{ width: "25px", height: "25px" }}
+                  />
                 </Button>
                 <Link to={`/emails/${email.id}`}>
                   <li

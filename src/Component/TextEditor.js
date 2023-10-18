@@ -29,27 +29,28 @@ const MyTextEditor = () => {
   };
 
   const sanitizeHtml = (html) => {
-   
     return html.replace(/<\/?p>/g, "");
   };
 
   const handleSendClick = () => {
-   
     const sanitizedText = sanitizeHtml(text);
-    
-    fetch("https://mail-box-client-171d8-default-rtdb.firebaseio.com/email.json", {
-      method: "POST",
-      body: JSON.stringify({
-        recipient,
-        subject,
-        text: sanitizedText,
-        sender: userEmail ,
-        blueTick: true,
-      }),
-      headers: {
-        "Content-type": "application/json"
-      },
-    })
+
+    fetch(
+      "https://mail-box-client-171d8-default-rtdb.firebaseio.com/email.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          recipient,
+          subject,
+          text: sanitizedText,
+          sender: userEmail,
+          blueTick: true,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log("Email sent successfully!");
@@ -99,16 +100,21 @@ const MyTextEditor = () => {
 
 MyTextEditor.modules = {
   toolbar: [
-    [{ 'header': '1' }, { 'header': '2' }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ 'background': [] }],
-    ['link'],
+    [{ header: "1" }, { header: "2" }],
+    ["bold", "italic", "underline", "strike"],
+    [{ background: [] }],
+    ["link"],
   ],
 };
 
 MyTextEditor.formats = [
-  'header',
-  'bold', 'italic', 'underline', 'strike', 'background', 'link'
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "background",
+  "link",
 ];
 
 export default MyTextEditor;
