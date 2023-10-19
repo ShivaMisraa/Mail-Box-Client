@@ -17,6 +17,12 @@ const ViewMail = () => {
   }
 
   return (
+    <div className='veiwMail-div'>
+      <div className="navbar">
+        <div className="mailbox-content">
+          <span>Welcome to your mailbox</span>
+        </div>
+        </div>
     <div className="view-mail-container">
       <div className="view-mail-header">
         <h2 className="view-mail-title">Email Details</h2>
@@ -29,6 +35,7 @@ const ViewMail = () => {
         <p><strong>Subject:</strong> {email.subject}</p> 
         <p><strong>Message:</strong> {email.text}</p>
       </div>
+    </div>
     </div>
   );
 };

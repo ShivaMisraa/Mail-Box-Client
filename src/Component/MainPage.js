@@ -24,7 +24,7 @@ const MainPage = () => {
   }
 
   return (
-    <div>
+    <div className="mainPage">
       <div className="navbar">
         <div className="mailbox-content">
           <span>Welcome to your mailbox</span>

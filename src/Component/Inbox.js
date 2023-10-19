@@ -6,12 +6,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchEmailsPeriodically, selectAllEmails } from "../Store/emailSlice";
 import { Link } from "react-router-dom";
 import BlueTick from "./blueTick";
+import useDeleteRequest from "../Custom-hooks/useDelete.js";
 
 const EmailList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userEmail = localStorage.getItem("userEmail");
+
+  const { deleteResource, isDeleting } = useDeleteRequest(); 
+
 
   const backHandler = () => {
     navigate("/MainPage");
@@ -60,23 +64,15 @@ const EmailList = () => {
       });
   };
 
+
   const deleteEmail = (emailId) => {
-    fetch(
-      `https://mail-box-client-171d8-default-rtdb.firebaseio.com/email/${emailId}.json`,
-      {
-        method: "DELETE",
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          console.log("Email deleted from Firebase");
-          dispatch({ type: "email/deleteEmail", payload: emailId });
-        } else {
-          console.error("Error deleting email from Firebase");
-        }
+    deleteResource(`https://mail-box-client-171d8-default-rtdb.firebaseio.com/email/${emailId}.json`)
+      .then((data) => {
+        console.log('Email deleted from Firebase');
+        dispatch({ type: 'email/deleteEmail', payload: emailId });
       })
       .catch((error) => {
-        console.error("Error deleting email:", error);
+        console.error('Error deleting email:', error);
       });
   };
 
@@ -90,7 +86,7 @@ const EmailList = () => {
   }, [filteredEmails]);
 
   return (
-    <>
+    <div className="inbox-main">
       <div className="navbar">
         <div className="mailbox-content">
           <span>Welcome to your mailbox</span>
@@ -131,7 +127,7 @@ const EmailList = () => {
           )}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 

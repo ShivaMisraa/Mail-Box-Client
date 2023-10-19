@@ -22,7 +22,7 @@ const SentEmail = () => {
   };
 
   return (
-    <div>
+    <div className="sentMail-div">
       <div className="navbar">
         <div className="mailbox-content">
           <span>Welcome to your mailbox</span>
